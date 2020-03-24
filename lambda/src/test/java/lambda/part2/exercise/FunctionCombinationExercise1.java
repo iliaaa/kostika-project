@@ -13,7 +13,7 @@ public class FunctionCombinationExercise1 {
     @Test
     public void personHasNotEmptyLastNameAndFirstName0() {
         // TODO Person -> boolean
-        Predicate<Person> validate = null;
+        Predicate<Person> validate = p -> ((p.getLastName().length() != 0) && (p.getFirstName().length() != 0));
 
         assertTrue(validate.test(new Person("a", "b", 0)));
         assertFalse(validate.test(new Person("", "b", 0)));
@@ -23,13 +23,13 @@ public class FunctionCombinationExercise1 {
     // TODO
     // negate1: (Person -> boolean) -> (Person -> boolean)
     private Predicate<Person> negate1(Predicate<Person> test) {
-        return null;
+        return test.negate();
     }
 
     // TODO
     // validateFirstNameAndLastName: (Person -> boolean, Person -> boolean) -> (Person -> boolean)
     private Predicate<Person> validateFirstNameAndLastName(Predicate<Person> t1, Predicate<Person> t2) {
-        return null;
+        return (person -> t1.test(person) && t2.test(person));
     }
 
     @Test
@@ -50,13 +50,13 @@ public class FunctionCombinationExercise1 {
     // TODO
     // negate: (T -> boolean) -> (T -> boolean)
     private <T> Predicate<T> negate(Predicate<T> test) {
-        return null;
+        return test.negate();
     }
 
     // TODO
     // and: (T -> boolean, T -> boolean) -> (T -> boolean)
     private <T> Predicate<T> and(Predicate<T> t1, Predicate<T> t2) {
-        return null;
+        return t -> t1.test(t) && t2.test(t);
     }
 
     @Test
