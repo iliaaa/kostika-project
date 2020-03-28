@@ -4,6 +4,9 @@ import com.google.common.collect.ImmutableList;
 import data.Person;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.Assert.assertArrayEquals;
@@ -19,7 +22,12 @@ public class Lambdas01Exercise {
         };
 
         //TODO sort by age (Anonymous class)
-        //Arrays.sort(persons, ???);
+        Arrays.sort(persons, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return Integer.compare(o1.getAge(), o2.getAge());
+            }
+        });
 
         assertArrayEquals(persons, new Person[]{
                 new Person("name 3", "lastName 3", 20),
@@ -37,7 +45,7 @@ public class Lambdas01Exercise {
         };
 
         //TODO sort by age (lambda)
-        //Arrays.sort(persons, ???);
+        Arrays.sort(persons, (o1, o2) -> Integer.compare(o1.getAge(), o2.getAge()));
 
         assertArrayEquals(persons, new Person[]{
                 new Person("name 3", "lastName 3", 20),
@@ -55,7 +63,7 @@ public class Lambdas01Exercise {
         };
 
         //TODO sort by age (method reference)
-        //Arrays.sort(persons, ???);
+        Arrays.sort(persons, Comparator.comparingInt(Person::getAge));
 
         assertArrayEquals(persons, new Person[]{
                 new Person("name 3", "lastName 3", 20),
@@ -72,7 +80,9 @@ public class Lambdas01Exercise {
                 new Person("name 2", "lastName 1", 30)
         );
 
-        Person person = null;
+        Person person = persons.stream().
+                filter(p -> p.getAge() == 30).
+                findFirst().get();
 
         //TODO persons. ???
 
